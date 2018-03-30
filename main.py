@@ -1,7 +1,7 @@
 print("Hello world")
 print ('what\'s up?')
 print ('Let\'s get started...')
-STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
+
 
 def add_status(current_status_message):
     if current_status_message != None:
@@ -21,15 +21,16 @@ def add_status(current_status_message):
             print(str((item_position)) + ". " + message)
             item_position = item_position + 1
         message_selection = int(input("\nChoose from the above messages "))
-    if len(STATUS_MESSAGES) >= message_selection:
-        updated_status_message = STATUS_MESSAGES[message_selection - 1]
+        if(len(STATUS_MESSAGES)>=message_selection):
+            updated_status_message=STATUS_MESSAGES[message_selection-1]
     return updated_status_message
 
+STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
 def start_chat(spy_name,spy_salutation, spy_age, spy_rating):
     current_status_message = None
     show_menu=True
 
-    while show_menu:
+    while show_menu==True:
             menu_choices = ("What do you want to do? \n1. Add a status update \n2. Add a friend \n3. Send a secret message \n4. Read secret messages \n 5. Read chats \n 6.Close Application  ")
             menu_choice = input(menu_choices)
 
@@ -51,7 +52,7 @@ spy_name = "shubhi"
 spy_salutation = "miss"
 spy_age = 18
 spy_rating = 3.5
-user =input("Do you want to continue with the default user"+spy_salutation+" "+spy_name+" ?(Y/N)")
+user =input("Do you want to continue with the default user "+spy_salutation+" "+spy_name+" ?(Y/N)")
 if (user == "Y"):
     start_chat(spy_name, spy_salutation, spy_age, spy_rating)
 else:
