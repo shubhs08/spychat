@@ -1,14 +1,20 @@
 print("Hello world")
 print ('what\'s up?')
 print ('Let\'s get started...')
+friends_name = []
+friends_age = []
+friends_rating = []
+friends_is_online = []
+friends_status = []
 
-
+#a function to add status
 def add_status(current_status_message):
     if current_status_message != None:
       print ("Your current status message is " + current_status_message + "\n")
     else:
       print( 'You don\'t have any status message currently \n')
     default = input("Do you want to select from the older status (y/n)? ")
+    #this upper function converts the string to upper case
     if default.upper() == "N":
         new_status_message = input("What status message do you want to set?")
         if len(new_status_message) > 0:
@@ -26,6 +32,25 @@ def add_status(current_status_message):
     return updated_status_message
 
 STATUS_MESSAGES = ['My name is Bond, James Bond', 'Shaken, not stirred.']
+#function to add friend
+def add_friend():
+    new_name = input("Please add your friend's name:")
+    new_salutation = input("Are they Mr. or Ms.?: ")
+    new_name = new_name + " " + new_salutation
+    new_age = int(input("Age?"))
+    new_rating = int(input("Spy rating?"))
+
+    if len(new_name) > 0 and new_age > 12 and new_rating >= spy_rating:
+        friends_name.append(new_name)
+        friends_age.append(new_age)
+        friends_rating.append(new_rating)
+        friends_status.append(True)
+
+    else:
+        print('Sorry! Invalid entry. We can\'t add spy with the details you provided')
+    return int(len(friends_name))
+
+#function to start chat
 def start_chat(spy_name,spy_salutation, spy_age, spy_rating):
     current_status_message = None
     show_menu=True
@@ -40,6 +65,8 @@ def start_chat(spy_name,spy_salutation, spy_age, spy_rating):
 
             elif menu_choice == "2":
                 print("adding a friend")
+                number_of_friends = add_friend()
+                print("You have %d friends" % (number_of_friends))
             elif menu_choice == "3":
                 print("sending a secret message")
             elif menu_choice == "4":
