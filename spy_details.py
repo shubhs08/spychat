@@ -1,6 +1,32 @@
-name="shubhi"
-spy_salutation="Miss."
-full_name=spy_salutation + " " + name
-spy_age=19
-spy_rating=3.7
-status = "You are in..."
+from datetime import datetime
+
+#class for storing details
+class Spy:
+    def __init__(self, name, salutation, age, rating):
+        self.friends = []
+        self.name = name
+        self.salutation = salutation
+        self.age = age
+        self.rating = rating
+        self.is_online = True
+        self.chats = []
+        self.current_status_message = None
+
+
+# for a default user
+spy = Spy("Simran", "Ms.", 21, 4.6)
+
+#existing friends
+friend_one = Spy("Sahil", "Mr.", 21, 4.1)
+friend_two = Spy("Sudhanshu", "Mr.", 21, 4.4)
+friend_three = Spy("Tanya", "Ms.", 23, 4.5)
+
+friends = [friend_one, friend_two, friend_three]
+
+#chat class
+class ChatMessage:
+    def __init__(self, message, isItYou):
+        self.message = message
+        self.time = datetime.now()
+        self.isItYou = isItYou
+

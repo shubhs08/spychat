@@ -1,6 +1,7 @@
 #importing the packages
 from steganography.steganography import Steganography
 from datetime import datetime
+from spy_details import *
 
 print ('Let\'s start the spychat application.')
 
@@ -62,25 +63,20 @@ friends=[]#an empty list
 
 #########function to add a friend############
 
+
 def add_friends():
- # an empty dictionary to store the details
-    new_friend = {
-        'name' :"",
-        'salutation': "",
-        'age': 0,
-        'rating' : 0.0
-     }
-    new_friend['name'] = raw_input("please add your friend's name: ")
-    new_friend['salutation'] = raw_input("are they Mr. or Ms.?: ")
-    new_friend['name'] = new_friend['salutation'] + " " + new_friend['name']
-    new_friend['age'] = int(raw_input("age?"))
-    new_friend['rating'] = float(raw_input("spy_rating"))
-    if len(new_friend['name']) > 0 and new_friend['age']>12  and new_friend['rating']>=3.5 :
-        friends.append(new_friend)#dictionary elemnts are added to the list
-    else:
-        print
-        ('Sorry! Invalid entry. We can\'t add spy with the details you provided')
-    return(len(friends))
+    #new_friend = {"Name": "", "Salutation": "", "age": 0, "Rating": 0.0, "Chats": [] }
+    name=raw_input("Whats your friend spy name?")
+    salutation=raw_input("what would be the salutation, Mr. or Mrs??")
+    #Name= new_friend["Salutation"] + " " + new_friend["Name"]
+    age = int(input("what is friends age?"))
+    rating= float(input("what's your friend spy rating??"))
+    if len(name) > 0 and 12 < age < 50:  # add friend
+        friend_no=Spy(name,salutation,age,rating)
+        friends.append(friend_no)
+    else:      #####invalid details
+        print("Sorry we can't add your friend's details please try again.")
+    return len(friends)
 
 ##########a function to select friends#########
 
@@ -109,14 +105,16 @@ def send_message():
     output_image = 'output_new.jpg'
     text = raw_input("What do you want to say?")
     Steganography.encode(original_image, output_image, text)
-    new_chat = {
-        "message": text,
-        "time": datetime.now(),
-        "sent_by_me": True,
+    #new_chat = {
+       # "message": text,
+       # "time": datetime.now(),
+        #"sent_by_me": True,
 
-    }
+    #}
+    chat = ChatMessage(text, True)
+    friends[selection]["Chats"].append(chat)
 
-    friends[selection]['chats']=(new_chat)
+    #friends[selection]['chats']=(new_chat)
     print "Your secret message is ready! to be delivered"
 
 
@@ -127,25 +125,36 @@ def read_message():
     output_path = raw_input("What is the name of the file to be decoded?")
     secret_text = Steganography.decode(output_path)
     print("your secret message is:"+secret_text)
-    new_chat = {
-    "message": secret_text,
-    "time": datetime.now(),
-    "sent_by_me": False
-    }
-    friends[sender]['chats']=(new_chat)
+    chat = ChatMessage(secret_text, True)
+    friends[sender]["Chats"].append(chat)
+    print(secret_text)
+    #new_chat = {
+    #"message": secret_text,
+    #"time": datetime.now(),
+    #"sent_by_me": False
+    #}
+    #friends[sender]['chats']=(new_chat)
     print(secret_text)
     print "Your secret message has been saved! spy"
 
 
 ################storing the default user details########
 
-spy_name = "shubhi"
-spy_salutation = "miss"
-spy_age = 18
-spy_rating = 3.5
+#spy_name = "shubhi"
+#spy_salutation = "miss"
+#spy_age = 18
+#spy_rating = 3.5
 #asking to continue with default or create a new one
-user =raw_input("Do you want to continue with  "+spy_salutation+" "+spy_name+" ?(Y/N)")
+
+user =raw_input("Do you want to continue with  "+Spy.salutation+" "+Spy.name+" ?(Y/N)")
 if (user == "Y"or user=='y' ):
+    from spy_details import spy
+
+    print('Welcome,%s  %s with %d years of age and %.1f rating. Welcome to SpyChat.... ' % (
+    spy.salutation, spy.name, spy.age, spy.rating))
+    from spy_details import friend_one, friend_three, friend_two
+
+    Friends = [friend_one, friend_two, friend_three]
     start_chat(spy_name, spy_salutation, spy_age, spy_rating)
 else:
     spy_name = raw_input("Welcome to spy chat, you must tell me your spy name first: ")
