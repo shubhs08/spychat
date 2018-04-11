@@ -1,6 +1,4 @@
 from datetime import datetime
-
-#class for storing details
 class Spy:
     def __init__(self, name, salutation, age, rating):
         self.friends = []
@@ -14,19 +12,19 @@ class Spy:
 
 
 # for a default user
-spy = Spy("Simran", "Ms.", 21, 4.6)
+spy = Spy("Shubhi", "Ms.", 21, 4.6)
 
 #existing friends
-friend_one = Spy("Sahil", "Mr.", 21, 4.1)
-friend_two = Spy("Sudhanshu", "Mr.", 21, 4.4)
+friend_one = Spy("Sakshi", "Mr.", 21, 4.1)
+friend_two = Spy("Neeti", "Mr.", 21, 4.4)
 friend_three = Spy("Tanya", "Ms.", 23, 4.5)
 
 friends = [friend_one, friend_two, friend_three]
 
 #chat class
 class ChatMessage:
-    def __init__(self, message, isItYou):
+    def __init__(self, message, sent_by_me):
         self.message = message
         self.time = datetime.now()
-        self.isItYou = isItYou
+        self.sent_by_me = sent_by_me
 
